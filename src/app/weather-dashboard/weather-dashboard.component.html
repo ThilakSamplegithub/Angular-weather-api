@@ -1,0 +1,48 @@
+<div>
+    <h2>User Preferences</h2>
+    <form [formGroup]="preferencesForm">
+      <label for="defaultLocation">Default Location:</label>
+      <input type="text" id="defaultLocation" formControlName="defaultLocation">
+      
+      <label for="updateInterval">Update Interval:</label>
+      <select formControlName="updateInterval">
+        <option value="5">5 minutes</option>
+        <option value="30">30 minutes</option>
+        <option value="60">1 hour</option>
+      </select>
+
+      <label for="temperatureUnit">Temperature Unit:</label>
+      <select id="temperatureUnit" formControlName="temperatureUnit">
+        <option value="Celsius">Celsius</option>
+        <option value="Fahrenheit">Fahrenheit</option>
+      </select>
+      <label for="newLocation">Add New Location:</label>
+      <input type="text" id="newLocation" formControlName="newLocation">
+      <button type="button" (click)="addNewLocation()">Add Location</button>
+      <button type="button" (click)="savePreferences()">Save Preferences</button>
+    </form>
+  </div>
+  
+  <!-- weather-dashboard.component.html -->
+
+  <div *ngIf="preferencesForm.value.locations.length > 0 || !preferencesForm.value.locations.length">
+    <!-- Display weather information for each selected location or default location -->
+    <div *ngFor="let location of preferencesForm.value.locations">
+      <div>
+        <h2>{{ location }}</h2>
+        <!-- Display weather information for each location -->
+        <!-- You can customize this part based on your UI design -->
+        <p>Temperature: {{ getTemperatureForLocation(location) }}</p>
+        <p>Other Weather Details...</p>
+      </div>
+    </div>
+  
+    <!-- Display weather information for the default location if no locations are selected -->
+    <div *ngIf="!preferencesForm.value.locations.length">
+      <div>
+        <h2>Hyderabad</h2>
+        <p>Temperature: {{ getTemperatureForLocation(defaultLocation) }}</p>
+        <p>Other Weather Details...</p>
+      </div>
+    </div>
+  </div>
