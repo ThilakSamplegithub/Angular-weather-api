@@ -31,7 +31,7 @@ div > div h1 {
   text-align: center;
 }
 .container {
-  border: 1px solid red;
+  border: 1px solid rgba(75, 0, 130, 1);
   background: repeating-radial-gradient(ellipse, 
   rgba(255, 0, 0, 0),    /* Red */
   rgba(255, 165, 0, 1),  /* Orange */
