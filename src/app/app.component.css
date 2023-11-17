@@ -1,0 +1,45 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+div > div {
+  /* border:1px solid white; */
+  width: 50%;
+  margin: 22% 50%;
+  padding: 2%;
+  transform: translate(-50%, -50%);
+  /* background-color: white; */
+  border-radius: 20px;
+  /* background: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(240, 240, 240), rgb(217, 217, 217) ); */
+  background-image: linear-gradient(
+      to top right,
+      rgba(26, 26, 46, 0),
+      rgba(48, 71, 94, 0),
+      rgba(145, 167, 255, 1)
+    ),
+    url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXQ3K0CzI3ZyqdsZRg3a1n7nkzOe42Oi1gRg&usqp=CAU");
+    background-size: cover;
+
+    /* background: linear-gradient(to right bottom, rgba(0, 77, 0,3), rgba(26, 117, 26,2), rgba(102, 204, 102,4)); */
+  /* background: linear-gradient(to right, #ffcccc, #ccffcc, #ccccff); */
+
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+div > div h1 {
+  text-align: center;
+}
+.container {
+  border: 1px solid red;
+  background: repeating-radial-gradient(ellipse, 
+  rgba(255, 0, 0, 0),    /* Red */
+  rgba(255, 165, 0, 1),  /* Orange */
+  rgba(255, 255, 0, 1),  /* Yellow */
+  rgba(0, 128, 0, 1),    /* Green */
+  rgba(0, 0, 255, 1),    /* Blue */
+  rgba(75, 0, 130, 1),   /* Indigo */
+  rgba(128, 0, 128, 0)   /* Violet */
+);
+  /* font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; */
+}

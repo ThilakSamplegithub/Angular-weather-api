@@ -1,25 +1,28 @@
 <div>
     <h2>User Preferences</h2>
     <form [formGroup]="preferencesForm">
-      <label for="defaultLocation">Default Location:</label>
-      <input type="text" id="defaultLocation" formControlName="defaultLocation">
+      <!-- <label for="defaultLocation">Default Location:</label> -->
+      <!-- <input type="text" id="defaultLocation" formControlName="defaultLocation"> -->
       
-      <label for="updateInterval">Update Interval:</label>
-      <select formControlName="updateInterval">
-        <option value="5">5 minutes</option>
-        <option value="30">30 minutes</option>
-        <option value="60">1 hour</option>
+      <label class="update" for="updateInterval">Update Interval:</label>
+      <select  formControlName="updateInterval">
+        <option  value="5">5 minutes</option>
+        <option  value="30">30 minutes</option>
+        <option  value="60">1 hour</option>
       </select>
 
       <label for="temperatureUnit">Temperature Unit:</label>
-      <select id="temperatureUnit" formControlName="temperatureUnit">
-        <option value="Celsius">Celsius</option>
-        <option value="Fahrenheit">Fahrenheit</option>
+      <select id="temperatureUnit"  formControlName="temperatureUnit">
+        <option value="">Unit</option>
+        <option value="celsius">Celsius</option>
+        <option value="fahrenheit">Fahrenheit</option>
       </select>
-      <label for="newLocation">Add New Location:</label>
-      <input type="text" id="newLocation" formControlName="newLocation">
-      <button type="button" (click)="addNewLocation()">Add Location</button>
-      <button type="button" (click)="savePreferences()">Save Preferences</button>
+      <div>
+        <label  class="location"   for="newLocation">Add New Location:</label>
+        <input  class="location"  type="text" id="newLocation" formControlName="newLocation">
+        <button class="location"  type="button" (click)="addNewLocation()">Add Location</button>
+        <!-- <button type="button" (click)="savePreferences()">Save Preferences</button> -->
+      </div>
     </form>
   </div>
   
@@ -33,7 +36,7 @@
         <!-- Display weather information for each location -->
         <!-- You can customize this part based on your UI design -->
         <p>Temperature: {{ getTemperatureForLocation(location) }}</p>
-        <p>Other Weather Details...</p>
+        <!-- <p>Other Weather Details...</p> -->
       </div>
     </div>
   
@@ -42,7 +45,7 @@
       <div>
         <h2>Hyderabad</h2>
         <p>Temperature: {{ getTemperatureForLocation(defaultLocation) }}</p>
-        <p>Other Weather Details...</p>
+        <!-- <p>Other Weather Details...</p> -->
       </div>
     </div>
   </div>

@@ -37,8 +37,8 @@ export class WeatherDashboardComponent
   // weather-dashboard.component.ts
   getTemperatureForLocation(location: string): string {
     // Find the weather data for the specified location
-    console.log(location,'inside getTemperatureLocation')
-    console.log(this.weatherDetails,'inside getTemperatureForL')
+    // console.log(location,'inside getTemperatureLocation')
+    // console.log(this.weatherDetails,'inside getTemperatureForL')
     const weatherData = this.weatherDetails.find(
       (item) => item.location === location
     );
@@ -51,15 +51,21 @@ export class WeatherDashboardComponent
     ) {
       // Assuming temperature is in Kelvin; you might need to convert it to Celsius or Fahrenheit
       const temperatureInKelvin = weatherData.otherDetails.main.temp;
+     console.log(this.preferencesForm.get('temperatureUnit')?.value,'inside getTemperature location')
+      const tempUnit=this.preferencesForm.get('temperatureUnit')?.value
+     if(tempUnit==='fahrenheit'){
+      return this.convertToFahrenheit(temperatureInKelvin).toFixed(2) + '°F';
+     }else{
       return `${Math.round(temperatureInKelvin - 273.15)}°C`; // Convert to Celsius
+     }
     } else {
-      return 'Temperature not available';
+      return 'Invalid cityname';
     }
   }
 
   ngOnInit(): void {
     this.initForm();
-    console.log(this.preferencesForm.value,'inside ngOnit');
+    // console.log(this.preferencesForm.value,'inside ngOnit');
     this.fetchWeatherData(); // Initial fetch
 
     // Fetch weather data based on the specified update interval
@@ -76,9 +82,9 @@ export class WeatherDashboardComponent
 
   // weather-dashboard.component.ts
   fetchWeatherData(): void {
-    console.log("fetchWeatherData is invoked")
+    // console.log("fetchWeatherData is invoked")
     const locations = this.preferencesForm.value.locations;
-    console.log(locations, 'inside fetchWeatherData');
+    // console.log(locations, 'inside fetchWeatherData');
   
     if (locations.length === 0) {
       const defaultLocation =
@@ -86,9 +92,9 @@ export class WeatherDashboardComponent
       this.weatherService
         .getWeatherDetails(defaultLocation)
         .subscribe((data: any) => {
-          console.log(data[0].lat, 'is data');
+          // console.log(data[0].lat, 'is data');
           const { lat, lon } = data[0];
-          console.log(lat, lon);
+          // console.log(lat, lon);
           this.fetchTemperatureForLocation(lat, lon, defaultLocation);
         });
     } else {
@@ -96,7 +102,7 @@ export class WeatherDashboardComponent
         this.weatherService
           .getWeatherDetails(location)
           .subscribe((data: any) => {
-            console.log(data,'inside subscribe that comes after weatherservice call')
+            // console.log(data,'inside subscribe that comes after weatherservice call')
             const { lat, lon } = data[0];
             this.fetchTemperatureForLocation(lat, lon, location);
           });
@@ -122,7 +128,7 @@ export class WeatherDashboardComponent
     const index = weatherDetails.findIndex(
       (item) => item.location === location
     );
-    console.log(data, 'is data');
+    // console.log(data, 'is data');
     // Fetch the user's temperature unit preference
     const temperatureUnit =
       this.userPreferencesService.getPreferences()?.temperatureUnit ||
@@ -150,7 +156,7 @@ export class WeatherDashboardComponent
       newLocation: '', // New input for adding locations
       locations: this.formBuilder.array([]),
     });
-    console.log(this.preferencesForm.value,'is preference value of array');
+    // console.log(this.preferencesForm.value,'is preference value of array');
 
     const savedPreferences = this.userPreferencesService.getPreferences();
     if (savedPreferences) {
@@ -159,9 +165,9 @@ export class WeatherDashboardComponent
   }
 
   savePreferences(): void {
-    console.log('Save Preferences button clicked!');
+    // console.log('Save Preferences button clicked!');
     if (this.preferencesForm.valid) {
-      console.log('yes');
+      // console.log('yes');
       this.preferencesForm.value.locations = Array.from(
         new Set(this.preferencesForm.value.locations)
       );
@@ -173,28 +179,38 @@ export class WeatherDashboardComponent
 
   extractTemperature(data: any, unit: string): string {
     // Implement logic to extract temperature based on the unit preference
+    console.log('Extract Temperature Method Called');  // Add this line
+    console.log('Form Control Value:', this.preferencesForm.get('temperatureUnit')?.value);  // Add this line
+    console.log('Unit Value:', unit);  // Add this line
     const temperature = data?.main?.temp;
-
+  
     if (temperature !== undefined) {
-      if (unit === 'fahrenheit') {
+      const unitLowerCase = this.preferencesForm.get('temperatureUnit')?.value; // Convert unit to lowercase
+      console.log(unitLowerCase,'is formControlvalue')
+      console.log(unitLowerCase === 'fahrenheit','is boolean exp')
+      if (unitLowerCase === 'fahrenheit') {
+        console.log("yes, it's Fahrenheit");
         // Convert temperature to Fahrenheit if the unit is Fahrenheit
         return this.convertToFahrenheit(temperature).toFixed(2) + '°F';
       } else {
+        console.log('yes, its Celsius');
         // Display temperature in Celsius by default
-        return temperature.toFixed(2) + '°C';
+        return (temperature-273.15).toFixed(2) + '°C';
       }
     } else {
       return 'Temperature not available';
     }
   }
-
+  
   convertToFahrenheit(celsius: number): number {
+    console.log(celsius,'is actually kelvins temperature')
     // Conversion formula from Celsius to Fahrenheit
-    return (celsius * 9) / 5 + 32;
+    console.log(`called convert into fareinheit`)
+    return (celsius-273.15) * 9 / 5 + 32;
   }
 
   addNewLocation(): void {
-    console.log('Add Location button clicked!');
+    // console.log('Add Location button clicked!');
     const newLocation = this.preferencesForm.get('newLocation')?.value;
   
     if (newLocation && !this.preferencesForm.value.locations.includes(newLocation)) {
