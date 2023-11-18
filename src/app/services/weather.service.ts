@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class WeatherService {
-  private apiUrl = 'http://api.openweathermap.org/geo/1.0/direct';
+  private apiUrl = 'https://api.openweathermap.org/geo/1.0/direct';
 
   constructor(private http: HttpClient) {}
 
