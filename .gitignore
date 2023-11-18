@@ -5,12 +5,17 @@
 /tmp
 /out-tsc
 /bazel-out
-
+# export const environment = {
+#     production: true,
+#     apiKey: 'a18b63e62753920054f7cb148922bb01', // Replace with your actual OpenWeatherMap API key
+#   };
+  
 # Node
 /node_modules
 npm-debug.log
 yarn-error.log
 package-lock.json
+environments
 # IDEs and editors
 .idea/
 .project
